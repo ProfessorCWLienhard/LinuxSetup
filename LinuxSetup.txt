@@ -1,0 +1,20 @@
+Ubuntu Setup
+sudo apt-get -qq update -y  
+sudo apt-get -qq upgrade -y
+sudo hostnamectl set-hostname localhost
+sudo apt-get -qq install -y openjdk-8-jdk openjfx
+# sudo apt-get -qq install -y oracle-java8-installer
+javac -version
+java -version
+sudo apt-get -qq install -y libmysql-java
+sudo echo 'CLASSPATH=.:/usr/share/java/mysql-connector-java.jar' >> /etc/environment
+sudo apt-get -qq install -y apache2
+sudo echo "ServerName localhost" > /etc/apache2/conf-available/servername.conf
+sudo a2enconf servername.conf
+sudo chmod 644 /var/log/apache2/error.log
+sudo chmod 755 /var/log/apache2
+sudo sed -i 's/create 640 root adm/create 644 root adm/' /etc/logrotate.d/apache2
+sudo apt-get -qq install -y tomcat8 tomcat8-docs tomcat8-admin tomcat8-examples
+sudo sed -i 's/<\/tomcat-users>/  <user username="tomcat" password="mucis" roles="manager-gui,admin-gui"\/><\/tomcat-users>/' /etc/tomcat8/tomcat-users.xml
+
+
